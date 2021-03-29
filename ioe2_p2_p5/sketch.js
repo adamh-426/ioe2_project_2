@@ -190,7 +190,7 @@ function keyPressed() {
 //function getData1() {
 //    httpGet(urla, 'json', function(response) {
 //    console.log(response);
-//    data = response;
+//    data1 = response;
 //    if(response){
 //        bgcR = 200;
 //        bgcG = 200;
@@ -206,7 +206,7 @@ function keyPressed() {
 //function getData2() {
 //    httpGet(urlb, 'json', function(response) {
 //    console.log(response);
-//    data = response;
+//    data2 = response;
 //    if(response){
 //        bgcR = 200;
 //        bgcG = 200;
