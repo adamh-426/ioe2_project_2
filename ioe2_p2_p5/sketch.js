@@ -1,7 +1,7 @@
 //url for the LED widgets
-let urla = 'https://api.thinger.io/v3/users/sammybro098/devices/esp8266/resources/button1?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJEYXNoYm9hcmRfcDJfcmVtb3RlX2JhbmQiLCJ1c3IiOiJzYW1teWJybzA5OCJ9.y8uX6DWKxhcr7FAbBHWc2nQdNtinB0oAI0chOCtYBfw';
+let url = 'https://api.thinger.io/v3/users/sammybro098/devices/esp8266/resources/input1?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJEYXNoYm9hcmRfcDJfcmVtb3RlX2JhbmQiLCJ1c3IiOiJzYW1teWJybzA5OCJ9.y8uX6DWKxhcr7FAbBHWc2nQdNtinB0oAI0chOCtYBfw';
 
-let urlb = 'https://api.thinger.io/v3/users/sammybro098/devices/esp8266/resources/button2?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJEYXNoYm9hcmRfcDJfcmVtb3RlX2JhbmQiLCJ1c3IiOiJzYW1teWJybzA5OCJ9.y8uX6DWKxhcr7FAbBHWc2nQdNtinB0oAI0chOCtYBfw';
+//let urlb = 'https://api.thinger.io/v3/users/sammybro098/devices/esp8266/resources/input2?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJEYXNoYm9hcmRfcDJfcmVtb3RlX2JhbmQiLCJ1c3IiOiJzYW1teWJybzA5OCJ9.y8uX6DWKxhcr7FAbBHWc2nQdNtinB0oAI0chOCtYBfw';
 
 //url for the button widgets
 let url1 = 'https://api.thinger.io/v3/users/sammybro098/devices/esp8266/resources/led1?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJEYXNoYm9hcmRfcDJfcmVtb3RlX2JhbmQiLCJ1c3IiOiJzYW1teWJybzA5OCJ9.y8uX6DWKxhcr7FAbBHWc2nQdNtinB0oAI0chOCtYBfw';
@@ -94,7 +94,7 @@ function draw() {
         let vol = amp.getLevel();
         volHistory.push(vol);
         noFill();
-        stroke(bgcR, 200, bgcB);
+        stroke(bgcR, bgcG, bgcB);
         
         translate(width / 2, height / 2);
         beginShape();
@@ -111,14 +111,14 @@ function draw() {
             volHistory.splice(0, 1);
         }
         
-        if (data1 == '1') {
+        if (data1 == '0') {
                 mwar1.amp(0.0);
                 mwar2.amp(0.8);
             }
         
-        if (data2 == '1') {
-                bwar.amp(0.0);
-            }
+//        if (data2 == '1') {
+//                bwar.amp(0.0);
+//            }
         
     }
     
@@ -134,22 +134,22 @@ function mouseClicked() {
     
     //Because my Feather Huzzah stopped working, I commented out the getData functions and used the mouseClicked function as an alternative to test out the interactions that should have been with data got from Thinger.io.
     
-    if (sampleIsLooping) {
-        if(mouseX > canvasW / 2){
-        bgcR = 200;
-        data1 = 1;
-        }else{
-        bgcR = 100;
-        data1 = 0;
-        }
-        if(mouseY < canvasH / 2){
-        bgcB = 50;
-        data2 = 1;
-        }else{
-        bgcB = 200;
-        data2 = 0;
-        }
-    }
+//    if (sampleIsLooping) {
+//        if(mouseX > canvasW / 2){
+//        bgcR = 200;
+//        data1 = 1;
+//        }else{
+//        bgcR = 100;
+//        data1 = 0;
+//        }
+//        if(mouseY < canvasH / 2){
+//        bgcB = 50;
+//        data2 = 1;
+//        }else{
+//        bgcB = 200;
+//        data2 = 0;
+//        }
+//    }
 }
 
 function dropIt() {
@@ -187,22 +187,20 @@ function keyPressed() {
     }
 }
 
-//function getData1() {
-//    httpGet(urla, 'json', function(response) {
-//    console.log(response);
-//    data1 = response;
-//    if(response){
-//        bgcR = 200;
-//        bgcG = 200;
-//        bgcB = 100;
-//    } else {
-//        bgcR = 100;
-//        bgcG = 200;
-//        bgcB = 100;
-//    }
-//    });
-//}
-//
+function getData1() {
+    httpGet(url, 'json', function(response) {
+    console.log(response);
+    data1 = response;
+    if(response){
+        bgcG = 250;
+        bgcB = 100;
+    } else {
+        bgcG = 200;
+        bgcB = 200;
+    }
+    });
+}
+
 //function getData2() {
 //    httpGet(urlb, 'json', function(response) {
 //    console.log(response);
